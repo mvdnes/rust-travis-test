@@ -1,0 +1,19 @@
+language: rust
+
+rust:
+    - stable
+
+sudo: false
+
+notifications:
+    email:
+        on_success: never
+        on_failure: always
+
+script:
+    - cargo build
+    - cargo test
+    - cargo doc --no-deps
+
+after_success:
+    - curl https://mvdnes.github.io/rust-docs/travis-doc-upload.sh | bash
