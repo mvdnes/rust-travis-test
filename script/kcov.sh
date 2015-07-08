@@ -13,4 +13,6 @@ make install
 cd ../..
 export PATH=$TARGET/bin:$PATH
 
-kcov --coveralls-id=$TRAVIS_JOB_ID --exclude-pattern=/.cargo target/kcov target/debug/$PROJECT-*
+cargo rustc -- --test -C 'link-args=-Wl,--no-gc-sections'
+
+kcov --coveralls-id=$TRAVIS_JOB_ID --exclude-pattern=/.cargo target/kcov target/debug/$PROJECT
