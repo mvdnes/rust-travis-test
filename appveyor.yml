@@ -15,8 +15,6 @@ install:
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
     - SET PATH=C:\Rust\bin;%PATH%
     - SET PATH=C:\Rust\bin\rustlib\%RUST_INSTALL_TRIPLE%\bin;%PATH%
-    - C:\Rust\bin\rustlib\%RUST_INSTALL_TRIPLE%\gcc.exe --version
-    - gcc --version
     - rustc --version
     - cargo --version
 
