@@ -1,10 +1,11 @@
-matrix:
-    - RUST_INSTALL_TRIPLE: i686-pc-windows-gnu
-      RUST_CHANNEL: stable
-    - RUST_INSTALL_TRIPLE: x86_64-pc-windows-gnu
-      RUST_CHANNEL: stable
-    - RUST_INSTALL_TRIPLE: x86_64-pc-windows-msvc
-      RUST_CHANNEL: nightly
+environment:
+    matrix:
+        - RUST_INSTALL_TRIPLE: i686-pc-windows-gnu
+          RUST_CHANNEL: stable
+        - RUST_INSTALL_TRIPLE: x86_64-pc-windows-gnu
+          RUST_CHANNEL: stable
+        - RUST_INSTALL_TRIPLE: x86_64-pc-windows-msvc
+          RUST_CHANNEL: nightly
 
 install:
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/channel-rust-${env:RUST_CHANNEL}"
