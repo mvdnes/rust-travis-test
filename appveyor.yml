@@ -13,8 +13,7 @@ install:
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/${env:RUST_INSTALLER}"
     - '%RUST_INSTALLER% /VERYSILENT /NORESTART /DIR="C:\Rust" /TYPE=full'
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-    - SET PATH=C:\Rust\bin;%PATH%
-    - SET PATH=C:\Rust\bin\rustlib\%RUST_INSTALL_TRIPLE%\bin;%PATH%
+    - ps: $env:path = "C:\Rust\bin;C:\Rust\bin\rustlib\${env:RUST_INSTALL_TRIPLE}\bin;" + $env:path
     - rustc --version
     - cargo --version
 
