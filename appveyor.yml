@@ -11,9 +11,20 @@ install:
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/channel-rust-${env:RUST_CHANNEL}"
     - ps: $env:RUST_INSTALLER = Select-String "${env:RUST_INSTALL_TRIPLE}.*exe" "channel-rust-${env:RUST_CHANNEL}" | select -exp line
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/${env:RUST_INSTALLER}"
-    - '%RUST_INSTALLER% /VERYSILENT /NORESTART /DIR="C:\Rust" /TYPE=full'
+    - '%RUST_INSTALLER% /VERYSILENT /NORESTART /DIR="C:\Rust"'
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-    - ps: $env:path = "C:\Rust\bin;C:\Rust\bin\rustlib\${env:RUST_INSTALL_TRIPLE}\bin;" + $env:path
+    - ps: |
+        if (-Not (Test-Path "C:\mingw64")) {
+            # Install MinGW.
+            $url  = "http://sourceforge.net/projects/mingw-w64/files/"
+            $url += "Toolchains%20targetting%20Win64/Personal%20Builds/"
+            $url += "mingw-builds/4.9.2/threads-win32/seh/"
+            $url += "x86_64-4.9.2-release-win32-seh-rt_v3-rev0.7z/download"
+            Invoke-WebRequest -UserAgent wget -Uri $url -OutFile x86_64-4.9.2-release-win32-seh-rt_v3-rev0.7z
+            &7z x -oC:\ x86_64-4.9.2-release-win32-seh-rt_v3-rev0.7z > $null
+        }
+    - set PATH=C:\mingw64\bin;%PATH%
+    - set PATH=C:\Rust\bin;%PATH%
     - rustc --version
     - cargo --version
 
