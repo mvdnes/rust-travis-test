@@ -13,6 +13,7 @@ install:
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/${env:RUST_INSTALLER}"
     - '%RUST_INSTALLER% /VERYSILENT /NORESTART /DIR="C:\Rust"'
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
+    - ps: ls 'C:\Rust\bin\rustlib\*\bin\*'
     - ps: |
         if (($env:RUST_INSTALL_TRIPLE -like "x86_64*gnu") -And -Not (Test-Path "C:\mingw64")) {
             # Install MinGW.
