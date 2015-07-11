@@ -1,5 +1,7 @@
 environment:
     matrix:
+        - RUST_INSTALL_TRIPLE: x86_64-pc-windows-gnu
+          RUST_CHANNEL: beta
         - RUST_INSTALL_TRIPLE: i686-pc-windows-gnu
           RUST_CHANNEL: beta
         - RUST_INSTALL_TRIPLE: x86_64-pc-windows-msvc
