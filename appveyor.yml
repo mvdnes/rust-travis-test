@@ -23,7 +23,7 @@ install:
             Invoke-WebRequest -UserAgent wget -Uri $url -OutFile x86_64-4.9.2-release-win32-seh-rt_v3-rev0.7z
             &7z x -oC:\ x86_64-4.9.2-release-win32-seh-rt_v3-rev0.7z > $null
         }
-    - set PATH=C:\MinGW\bin;C:\mingw64\bin;%PATH%
+    - set PATH=C:\MinGW64\bin;C:\mingw\bin;%PATH%
     - set PATH=C:\Rust\bin;%PATH%
     - rustc --version
     - cargo --version
