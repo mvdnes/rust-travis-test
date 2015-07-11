@@ -11,7 +11,11 @@ install:
     - ps: Start-FileDownload "http://static.rust-lang.org/dist/${env:RUST_INSTALLER}"
     - '%RUST_INSTALLER% /VERYSILENT /NORESTART /DIR="C:\Rust"'
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
-    - ps: $env:path += ";C:\MinGW\bin;C:\Rust\bin"
+    - ps: |
+        Invoke-WebRequest -UserAgent wget -Uri "http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-win32/seh/x86_64-5.1.0-release-win32-seh-rt_v4-rev0.7z/download" -OutFile mingw64.7z
+        &7z x -oC:\ mingw64.7z > $nul
+    - ps: $env:path = "C:\mingw64\bin;C:\Rust\bin;" + $env:path
+    - gcc --version
     - rustc --version
     - cargo --version
 
