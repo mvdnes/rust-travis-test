@@ -18,10 +18,10 @@ install:
         &7z x -oC:\ mingw64.7z > $nul
     - ps: $env:path = "C:\mingw64\bin;C:\Rust\bin;" + $env:path
     - gcc --version
-    - rustc --version
+    - rustc --version --verbose
     - cargo --version
 
 build: false
 
 test_script:
-    - cargo test
+    - cargo test --verbose
