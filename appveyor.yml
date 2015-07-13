@@ -12,7 +12,7 @@ install:
         Start-FileDownload "http://static.rust-lang.org/dist/channel-rust-${env:RUST_CHANNEL}"
         $env:RUST_INSTALLER = Select-String "${env:RUST_INSTALL_TRIPLE}.*exe" "channel-rust-${env:RUST_CHANNEL}" | select -exp line
         Start-FileDownload "http://static.rust-lang.org/dist/${env:RUST_INSTALLER}"
-        &$env:RUST_INSTALLER /VERYSILENT /NORESTART /DIR="C:\Rust"'
+        &$env:RUST_INSTALLER /VERYSILENT /NORESTART /DIR="C:\Rust"
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
     - ps: |
         Invoke-WebRequest -UserAgent wget -Uri "http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-win32/seh/x86_64-5.1.0-release-win32-seh-rt_v4-rev0.7z/download" -OutFile mingw64.7z
