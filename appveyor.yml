@@ -1,8 +1,8 @@
 environment:
     matrix:
-        - RUST_INSTALL_TRIPLE: x86_64-pc-windows-gnu
-          RUST_CHANNEL: stable
         - RUST_INSTALL_TRIPLE: i686-pc-windows-gnu
+          RUST_CHANNEL: stable
+        - RUST_INSTALL_TRIPLE: x86_64-pc-windows-gnu
           RUST_CHANNEL: stable
         - RUST_INSTALL_TRIPLE: x86_64-pc-windows-msvc
           RUST_CHANNEL: nightly
@@ -15,7 +15,7 @@ install:
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" amd64
     - ps: $env:path = "C:\Rust\bin;" + $env:path
     - ps: |
-        if (($env:RUST_INSTALL_TRIPLE -like "*-gnu")) {
+        if ($env:RUST_INSTALL_TRIPLE -like "*-gnu") {
             Invoke-WebRequest -UserAgent wget -Uri "http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/5.1.0/threads-win32/seh/x86_64-5.1.0-release-win32-seh-rt_v4-rev0.7z/download" -OutFile mingw64.7z
             7z x -oC:\ mingw64.7z > $null
             $env:path = "C:\mingw64\bin;" + $env:path
@@ -27,4 +27,5 @@ install:
 build: false
 
 test_script:
+    - cargo build
     - cargo test
