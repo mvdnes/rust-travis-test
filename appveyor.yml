@@ -35,12 +35,11 @@ install:
             $env:path = "C:\mingw\bin;" + $env:path
             gcc --version
         }
-        elseif ($env:RUST_INSTALL_TOOLCHAIN -eq "msvc") {
-            if ($env:PLATFORM -eq "x64") { $vcargs = "amd64" }
-            else { $vcargs = "x86" }
-            Invoke-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" $vcargs
-            cl /?
-        }
+    - ps: |
+        if ($env:PLATFORM -eq "x64") { $env:vcargs = "amd64" }
+        else { $env:vcargs = "x86" }
+    - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" %vcargs%
+    - cl /?
     - rustc --version --verbose
     - cargo --version
 
