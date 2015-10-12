@@ -35,7 +35,7 @@ install:
             $env:path = "C:\mingw\bin;" + $env:path
             gcc --version
         }
-        else ($env:RUST_INSTALL_TOOLCHAIN -eq "msvc") {
+        elseif ($env:RUST_INSTALL_TOOLCHAIN -eq "msvc") {
             $vcargs = ?: {$Pscx:Is64BitProcess} {'amd64'} {'x86'}
             Invoke-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" $vcargs
             cl /?
