@@ -39,7 +39,6 @@ install:
         if ($env:PLATFORM -eq "x64") { $env:vcargs = "amd64" }
         else { $env:vcargs = "x86" }
     - call "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" %vcargs%
-    - cl.exe /?
     - rustc --version --verbose
     - cargo --version
 
